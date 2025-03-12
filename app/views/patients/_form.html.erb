@@ -1,0 +1,36 @@
+<%= form_with(model: @patient, local: true) do |form| %>
+  <% if @patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@patient.errors.count, "error") %> 発生しました:</h2>
+      <ul>
+        <% @patient.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, '名前' %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age, '年齢' %>
+    <%= form.number_field :age, min: 0 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :medical_history, '病歴' %>
+    <%= form.text_area :medical_history %>
+  </div>
+
+  <div class="field">
+    <%= form.label :insurance_number, '保険番号' %>
+    <%= form.text_field :insurance_number %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit '登録' %>
+  </div>
+<% end %>

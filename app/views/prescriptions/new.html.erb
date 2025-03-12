@@ -1,0 +1,47 @@
+<h1>新規処方箋作成</h1>
+
+<%= form_with(model: @prescription, local: true) do |form| %>
+  <% if @prescription.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@prescription.errors.count, "error") %> 発生しました:</h2>
+      <ul>
+        <% @prescription.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :patient_id, '患者' %>
+    <%= form.collection_select :patient_id, @patients, :id, :full_details, prompt: '患者を選択してください' %>
+  </div>
+
+  <h3>薬剤を選択</h3>
+  <div class="medications-selection">
+    <% @medications.each do |medication| %>
+      <div class="medication-item">
+        <%= check_box_tag 'medication_ids[]', medication.id, false, id: "medication_#{medication.id}" %>
+        <%= label_tag "medication_#{medication.id}", medication.display_name %>
+
+        <div class="medication-details">
+          <div class="field">
+            <%= label_tag "dosages[#{medication.id}]", '用量' %>
+            <%= text_field_tag "dosages[#{medication.id}]", "1日3回 1錠ずつ" %>
+          </div>
+
+          <div class="field">
+            <%= label_tag "instructions[#{medication.id}]", '服用方法' %>
+            <%= text_field_tag "instructions[#{medication.id}]", "食後に服用してください" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit '処方箋作成' %>
+  </div>
+<% end %>
+
+<%= link_to '戻る', prescriptions_path %>

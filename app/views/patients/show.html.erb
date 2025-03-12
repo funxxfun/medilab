@@ -1,0 +1,36 @@
+<h1>患者詳細</h1>
+
+<div class="patient-info">
+  <p><strong>名前:</strong> <%= @patient.name %></p>
+  <p><strong>年齢:</strong> <%= @patient.age %>歳</p>
+  <p><strong>病歴:</strong> <%= @patient.medical_history %></p>
+  <p><strong>保険番号:</strong> <%= @patient.insurance_number %></p>
+</div>
+
+<h2>処方箋履歴</h2>
+<% if @patient.prescriptions.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>発行日</th>
+        <th>薬剤数</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @patient.prescriptions.each do |prescription| %>
+        <tr>
+          <td><%= prescription.formatted_issue_date %></td>
+          <td><%= prescription.total_medications %></td>
+          <td><%= link_to '詳細', prescription %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>処方箋の履歴はありません。</p>
+<% end %>
+
+<%= link_to '編集', edit_patient_path(@patient) %> |
+<%= link_to '戻る', patients_path %>
+
