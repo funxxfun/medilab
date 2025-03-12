@@ -13,7 +13,7 @@ before_action :set_medication, only: [:show, :edit, :update, :destroy]
   end
 
   def create
-    @medication = Medication.new(params[:medication])
+    @medication = Medication.new(medication_params)
 
     if @medication.save
       redirect_to @medication, notice: "薬剤情報が登録されました"
@@ -26,7 +26,7 @@ before_action :set_medication, only: [:show, :edit, :update, :destroy]
   end
 
   def update
-    if @medication.update(params[:medication])
+    if @medication.update(medication_params)
       redirect_to @medication, notice: "薬剤情報が更新されました"
     else
       render :edit

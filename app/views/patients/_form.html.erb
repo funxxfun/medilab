@@ -1,9 +1,9 @@
-<%= form_with(model: @patient, local: true) do |form| %>
-  <% if @patient.errors.any? %>
+<%= form_with(model: patient, local: true) do |form| %>
+  <% if patient.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@patient.errors.count, "error") %> 発生しました:</h2>
+      <h2><%= pluralize(patient.errors.count, "error") %> 発生しました:</h2>
       <ul>
-        <% @patient.errors.full_messages.each do |message| %>
+        <% patient.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

@@ -4,7 +4,6 @@ class PatientsController < ApplicationController
   end
 
   def show
-    @patient = Patient.find_by(id: params[:id])
   end
 
   def new
@@ -12,7 +11,10 @@ class PatientsController < ApplicationController
   end
 
   def create
-    @patient = Patient.new(params[:patient])
+    @patient = Patient.new(patient_params)
+
+    # ここでプログラムが一時停止する
+    # binding.pry
 
     if @patient.save
       redirect_to @patient, notice: "患者が登録されました"
@@ -25,7 +27,7 @@ class PatientsController < ApplicationController
   end
 
   def update
-    if @patient.update(params[:patient])
+    if @patient.update(patient_params)
       redirect_to @patient, notice: "患者情報が更新されました"
     else
       render :edit
