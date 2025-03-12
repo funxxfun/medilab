@@ -1,5 +1,7 @@
 <h1>患者詳細</h1>
 
+<%# binding.pry %>
+
 <div class="patient-info">
   <p><strong>名前:</strong> <%= @patient.name %></p>
   <p><strong>年齢:</strong> <%= @patient.age %>歳</p>
@@ -33,4 +35,3 @@
 
 <%= link_to '編集', edit_patient_path(@patient) %> |
 <%= link_to '戻る', patients_path %>
-
